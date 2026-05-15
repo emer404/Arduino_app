@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Control App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Control de Arduino</h1>
+        <div class="status">
+            <p>Estado: <span id="status">Apagado</span></p>
+        </div>
+        <div class="controls">
+            <button id="btnOn" class="btn btn-on">Encender</button>
+            <button id="btnOff" class="btn btn-off">Apagar</button>
+        </div>
+        <div class="logs">
+            <h3>Registro de acciones:</h3>
+            <div id="logContainer"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
