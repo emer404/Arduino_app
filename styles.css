@@ -9,6 +9,52 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.fondobarra {
+    width: 250px;
+    background: rgba(0, 0, 0, 0.8);
+    min-height: 100vh;
+    padding: 20px 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+nav {
+    padding: 0 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    padding: 15px 20px;
+    margin-bottom: 5px;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav ul li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+nav ul li:first-child {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -126,4 +172,55 @@ h1 {
 
 .log-entry:last-child {
     border-bottom: none;
+}
+
+/* Responsive design para móviles */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .fondobarra {
+        width: 100%;
+        min-height: auto;
+        padding: 10px 0;
+    }
+
+    nav {
+        padding: 0 10px;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    nav ul li {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        margin-bottom: 0;
+        text-transform: capitalize;
+        letter-spacing: 0;
+    }
+
+    nav ul li:hover {
+        transform: none;
+    }
+
+    .main-content {
+        padding: 20px 10px;
+    }
+
+    .container {
+        padding: 30px 20px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }
