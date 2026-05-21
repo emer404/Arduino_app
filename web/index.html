@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Control Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+</head>
+
+<body>
+
+    <div id="splash-screen" class="screen">
+        <div class="splash-content">
+            <div class="icon-animated">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h1>control Arduino</h1>
+            <p>Cargando..;</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-screen" class="screen hidden">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fa-solid fa-user-astronaut"></i>
+                <h2>Acceso al Sistema</h2>
+                <p>Cualquier usuario puede ingresar. ¡Escribe tu nombre y contraseña!</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="username" placeholder="Tu Nombre" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit">Iniciar Sesión <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="screen hidden">
+        <header class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-bolt animate-pulse"></i> IoT<span>Core</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#nosotros"><i class="fa-solid fa-users"></i> Quiénes Somos</a>
+                <a href="#ayuda"><i class="fa-solid fa-headset"></i> Soporte Técnico</a>
+            </nav>
+            <div class="user-profile">
+                <i class="fa-solid fa-circle-user"></i> <span id="user-display">Usuario</span>
+            </div>
+        </header>
+
+        <main class="dashboard-container">
+
+            <section class="main-panel">
+                <div class="card status-card">
+                    <h3><i class="fa-solid fa-signal"></i> Estado del Broker</h3>
+                    <div id="status-badge" class="badge disconnected">Desconectado</div>
+                    <p class="info-text">Servidor: <span>broker.hivemq.com</span></p>
+                    <p class="info-text">Tópico: <span>iot/circuito/control</span></p>
+                </div>
+
+                <div class="card control-card">
+                    <h3><i class="fa-solid fa-power-off"></i> Control de Circuito</h3>
+                    <p>Envía comandos en tiempo real al ESP32:</p>
+                    <div class="btn-group">
+                        <button id="btn-on" class="btn btn-primary"><i class="fa-solid fa-lightbulb"></i> ENCIENDE
+                            (ON)</button>
+                        <button id="btn-off" class="btn btn-danger"><i class="fa-solid fa-lightbulb-slash"></i> APAGA
+                            (OFF)</button>
+                    </div>
+                </div>
+            </section>
+
+            <h3 class="section-title"><i class="fa-solid fa-chart-simple"></i> Módulos de Monitoreo</h3>
+            <section class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="card dynamic-card">
+                            <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <h4>Gráficos de Comportamiento</h4>
+                            <div class="mock-chart">
+                                <div class="bar" style="height: 40%"></div>
+                                <div class="bar" style="height: 70%"></div>
+                                <div class="bar" style="height: 55%"></div>
+                                <div class="bar" style="height: 90%"></div>
+                            </div>
+                            <p>Monitoreo de latencia y telemetría activa.</p>
+                        </div>
+                        <div class="card dynamic-card">
+                            <div class="card-icon"><i class="fa-solid fa-table-list"></i></div>
+                            <h4>Tablas de Datos</h4>
+                            <table class="mock-table">
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Acción</th>
+                                </tr>
+                                <tr>
+                                    <td>14:02</td>
+                                    <td>LED -> ON</td>
+                                </tr>
+                                <tr>
+                                    <td>14:05</td>
+                                    <td>LED -> OFF</td>
+                                </tr>
+                            </table>
+                            <p>Historial de logs de eventos del sistema.</p>
+                        </div>
+                        <div class="card dynamic-card">
+                            <div class="card-icon"><i class="fa-solid fa-circle-info"></i></div>
+                            <h4>Información del Sistema</h4>
+                            <ul class="system-list">
+                                <li><strong>Hardware:</strong> ESP32 WROOM</li>
+                                <li><strong>Protocolo:</strong> MQTT via WS</li>
+                                <li><strong>Entorno:</strong> VS Code / IA</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-btn next" onclick="moveCarousel(1)"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4><i class="fa-solid fa-location-dot"></i> Ubicación y Contacto</h4>
+                    <p>Sede de Formación Avanzada - Pitalito, Huila</p>
+                    <p>Email: soporte.iot@ingenieria.com</p>
+                </div>
+                <div class="footer-form">
+                    <h4><i class="fa-solid fa-envelope-open-text"></i> Formulario de Reportes</h4>
+                    <form id="contact-form" onsubmit="event.preventDefault(); alert('Reporte enviado al instructor');">
+                        <input type="text" placeholder="Asunto del reporte" required>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 IoT Core Multiplataforma. Todos los derechos reservados.
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

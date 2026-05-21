@@ -1,0 +1,487 @@
+/* --- Variables de Diseño y Paleta de Colores --- */
+:root {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #38bdf8;
+    --primary-hover: #0ea5e9;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --border: #334155;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    background-color: var(--bg-main);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- 1. Sreens: Splash Animado --- */
+#splash-screen {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+}
+
+.icon-animated {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    animation: pulseIcon 2s infinite ease-in-out;
+}
+
+.progress-bar {
+    width: 250px;
+    height: 6px;
+    background-color: var(--border);
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary);
+    box-shadow: 0 0 12px var(--primary);
+    animation: loadProgress 4.8s linear forwards;
+}
+
+/* --- 2. Screens: Login Card --- */
+#login-screen {
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+}
+
+.login-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-header i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+}
+
+.login-card button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary);
+    color: #0f172a;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-card button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.02);
+}
+
+/* --- 3. Screens: Dashboard --- */
+#dashboard-screen {
+    overflow-y: auto;
+    position: relative;
+}
+
+.navbar {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 15px 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-right: 25px;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.user-profile {
+    background-color: var(--bg-main);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.user-profile i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.dashboard-container {
+    padding: 30px 4%;
+    flex: 1;
+}
+
+/* Tarjetas Base */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedores dinámicos (REACCIÓN AL PASAR EL CURSOR) */
+.dynamic-card {
+    min-width: 280px;
+    flex: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.dynamic-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 12px 20px rgba(56, 189, 248, 0.15);
+}
+
+/* Paneles de Control */
+.main-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.badge.connected {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: var(--success);
+}
+
+.badge.disconnected {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+}
+
+.info-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.info-text span {
+    color: white;
+    font-family: monospace;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--success);
+}
+
+.btn-primary:hover {
+    background-color: #16a34a;
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+/* --- Estructura del Carrusel --- */
+.section-title {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    padding: 10px 5px;
+}
+
+.carousel-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    transition: 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: var(--primary);
+    color: #0f172a;
+}
+
+.prev {
+    left: -20px;
+}
+
+.next {
+    right: -20px;
+}
+
+/* Adornos internos de las tarjetas de  simulación */
+.card-icon {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.mock-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 80px;
+    background: var(--bg-main);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.mock-chart .bar {
+    width: 100%;
+    background: var(--primary);
+    border-radius: 4px 4px 0 0;
+}
+
+.mock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.85rem;
+}
+
+.mock-table th,
+.mock-table td {
+    border: 1px solid var(--border);
+    padding: 6px;
+    text-align: left;
+}
+
+.system-list {
+    list-style: none;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+/* --- Footer Completo --- */
+.footer {
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border);
+    margin-top: 50px;
+    padding: 40px 4% 20px 4%;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-info h4,
+.footer-form h4 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.footer-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.footer-form form {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-form input {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+    outline: none;
+}
+
+.footer-form button {
+    background-color: var(--primary);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+/* Animaciones */
+@keyframes loadProgress {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes pulseIcon {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+.animate-pulse {
+    animation: pulseIcon 2s infinite;
+}
