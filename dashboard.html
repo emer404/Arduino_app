@@ -437,7 +437,7 @@
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none; padding-left: 15px;">
                                     <li class="nav-item">
-                                        <a href="config_mqtt.html" class="nav-link">
+                                        <a href="assets/config_mqtt.html" class="nav-link">
                                             <i class="fa fa-wifi nav-icon"></i>
                                             <p>MQTT</p>
                                         </a>
@@ -618,9 +618,9 @@
                         // MQTT connection over WebSockets
                         function connectMqtt() {
                             const host = localStorage.getItem('mqtt_host') || 'broker.hivemq.com';
-                            const port = localStorage.getItem('mqtt_port') || '8000';
+                            const port = localStorage.getItem('mqtt_port') || '8884';
                             const topic = localStorage.getItem('mqtt_topic') || 'LED/control';
-                            const useSSL = (localStorage.getItem('mqtt_ssl') || 'false') === 'true';
+                            const useSSL = (localStorage.getItem('mqtt_ssl') || 'true') === 'true';
 
                             // WebSocket URL format: ws://host:port/mqtt or wss://host:port/mqtt for SSL
                             const protocol = useSSL ? 'wss' : 'ws';

@@ -10,21 +10,21 @@
     <title>control de arduino</title>
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="css/adminlte.min.css">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="assets/plugins/select2/select2.min.css">
-    <link rel="icon" type="image/png" href="assets/images/icons/favicon.ico" />
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- jvectormap -->
-    <link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- library for persian date picker -->
-    <link type="text/css" rel="stylesheet" href="assets/plugins/kamadatepicker/kamadatepicker.min.css" />
-    <script src="assets/plugins/kamadatepicker/kamadatepicker.min.js"></script>
-    <script src="assets/plugins/kamadatepicker/kamadatepicker.holidays.js"></script>
-    <link rel="stylesheet" href="assets/css/custom-style.css">
+    <link type="text/css" rel="stylesheet" href="plugins/kamadatepicker/kamadatepicker.min.css" />
+    <script src="js/kamadatepicker.min.js"></script>
+    <script src="js/kamadatepicker.holidays.js"></script>
+    <link rel="stylesheet" href="css/custom-style.css">
 
     <style>
         /* Custom UI Components */
@@ -383,7 +383,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="dashboard.html" class="brand-link text-center">
+            <a href="../dashboard.html" class="brand-link text-center">
                 <span class="brand-text font-weight-light text-center">control arduino</span>
             </a>
 
@@ -405,7 +405,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="dashboard.html" class="nav-link">
+                                <a href="../dashboard.html" class="nav-link">
                                     <i class="nav-icon fa fa-home"></i>
                                     <p>Inicio</p>
                                 </a>
@@ -675,9 +675,9 @@
                         document.addEventListener("DOMContentLoaded", function() {
                             // Load existing config
                             document.getElementById('mqttHost').value = localStorage.getItem('mqtt_host') || 'broker.hivemq.com';
-                            document.getElementById('mqttPort').value = localStorage.getItem('mqtt_port') || '8000';
+                            document.getElementById('mqttPort').value = localStorage.getItem('mqtt_port') || '8884';
                             document.getElementById('mqttTopic').value = localStorage.getItem('mqtt_topic') || 'LED/control';
-                            document.getElementById('mqttSsl').value = localStorage.getItem('mqtt_ssl') || 'false';
+                            document.getElementById('mqttSsl').value = localStorage.getItem('mqtt_ssl') || 'true';
                             
                             const preset = localStorage.getItem('mqtt_preset') || 'hive';
                             document.getElementById('mqttPreset').value = preset;
@@ -692,16 +692,16 @@
 
                             if (preset === 'hive') {
                                 hostInput.value = 'broker.hivemq.com';
-                                portInput.value = '8000';
-                                sslSelect.value = 'false';
+                                portInput.value = '8884';
+                                sslSelect.value = 'true';
                             } else if (preset === 'emqx') {
                                 hostInput.value = 'broker.emqx.io';
-                                portInput.value = '8083';
-                                sslSelect.value = 'false';
+                                portInput.value = '8084';
+                                sslSelect.value = 'true';
                             } else if (preset === 'mosquitto') {
                                 hostInput.value = 'test.mosquitto.org';
-                                portInput.value = '8080'; // 8080 para WS (sin SSL), 8081 para WSS (con SSL)
-                                sslSelect.value = 'false';
+                                portInput.value = '8081'; // 8080 para WS (sin SSL), 8081 para WSS (con SSL)
+                                sslSelect.value = 'true';
                             }
                             
                             checkCustomState();
@@ -745,11 +745,11 @@
                                     text: 'Los parámetros MQTT se han guardado correctamente.',
                                     confirmButtonColor: '#43a047'
                                 }).then(() => {
-                                    window.location.href = 'dashboard.html';
+                                    window.location.href = '../dashboard.html';
                                 });
                             } else {
                                 alert('Configuración guardada correctamente.');
-                                window.location.href = 'dashboard.html';
+                                window.location.href = '../dashboard.html';
                             }
                         }
                     </script>
@@ -767,23 +767,20 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>$.widget.bridge('uibutton', $.ui.button)</script>
-    <script src="assets/plugins/select2/select2.full.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/plugins/knob/jquery.knob.js"></script>
-    <script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <script src="assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/plugins/fastclick/fastclick.js"></script>
-    <script src="assets/js/adminlte.js"></script>
-    <script src="assets/plugins/chartjs-old/Chart.min.js"></script>
+    <script src="js/select2.full.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.knob.js"></script>
+    <script src="js/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/adminlte.js"></script>
+    <script src="js/Chart.min.js"></script>
 
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/jquery/jquery.easing.min.js"></script>
-    <script src="assets/js/ruang-admin.min.js"></script>
-    <script src="assets/plugins/chart.js/Chart.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/ruang-admin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 
@@ -809,7 +806,7 @@
         $.widget.bridge('uibutton', $.ui.button)
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="assets/plugins/morris/morris.min.js"></script>
+    <script src="js/morris.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(function () {
