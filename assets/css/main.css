@@ -1,33 +1,9 @@
 /*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
+[ FONT — Google Fonts: Inter + Poppins ]*/
 
-@font-face {
-    font-family: 'Iran-SansDN';
-    src: url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.eot');
-    src: url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.woff') format('woff'), url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.ttf') format('truetype'), url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Iran-SansDN-Bold';
-    src: url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.eot');
-    src: url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.woff') format('woff'), url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.ttf') format('truetype'), url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.svg') format('svg');
-    font-weight: bold;
-    font-style: bold;
-}
-
-@font-face {
-    font-family: 'Iran-SansDN-Light';
-    src: url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.eot');
-    src: url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.woff') format('woff'), url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.ttf') format('truetype'), url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.svg') format('svg');
-    font-weight: light;
-    font-style: light;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
 
 * {
     margin: 0px;
@@ -38,7 +14,8 @@
 body,
 html {
     height: 100%;
-    /* font-family: 'Iran-SansDN'; */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -131,6 +108,9 @@ h4,
 h5,
 h6 {
     margin: 0px;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 p {
@@ -350,14 +330,16 @@ iframe {
 }
 
 .login100-form-title {
-    /* font-family: 'Iran-SansDN'; */
-    font-size: 24px;
-    color: #333333;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a2e;
     line-height: 1.2;
     text-align: center;
     width: 100%;
     display: block;
     padding-bottom: 54px;
+    letter-spacing: -0.02em;
 }
 
 
@@ -371,8 +353,9 @@ iframe {
 }
 
 .input100 {
-    /* font-family: 'Iran-SansDN'; */
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
+    font-weight: 400;
     line-height: 1.5;
     color: #666666;
     display: block;
@@ -464,11 +447,13 @@ iframe {
 }
 
 .login100-form-btn {
-    /* font-family: 'Iran-SansDN-Bold'; */
+    font-family: 'Inter', sans-serif;
     font-size: 15px;
+    font-weight: 700;
     line-height: 1.5;
     color: #fff;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
     width: 100%;
     height: 50px;
     border-radius: 25px;

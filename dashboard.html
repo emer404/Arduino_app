@@ -11,19 +11,8 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/css/adminlte.min.css">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="assets/plugins/select2/select2.min.css">
     <link rel="icon" type="image/png" href="assets/images/icons/favicon.ico" />
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- library for persian date picker -->
-    <link type="text/css" rel="stylesheet" href="assets/plugins/kamadatepicker/kamadatepicker.min.css" />
-    <script src="assets/js/kamadatepicker.min.js"></script>
-    <script src="assets/js/kamadatepicker.holidays.js"></script>
     <link rel="stylesheet" href="assets/css/custom-style.css">
 
     <style>
@@ -380,11 +369,7 @@
             </ul>
 
             <!-- left logo -->
-            <ul class="navbar-nav mr-auto">
-                <a href="#" class="brand-link">
-                    <img src="assets/images/arduino-logo.png" alt="Logo" class="brand-image" style="opacity: .8; max-width: 150px; height: auto;">
-                </a>
-            </ul>
+        
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-flex align-items-center pr-2">
                     <button id="btnMqttConnect" class="btn btn-sm btn-success mr-2" onclick="simulateMqttConnect()"><i class="fa fa-link"></i> Conectar</button>
@@ -413,7 +398,7 @@
                             <img src="assets/images/Avatars/Avatar 1.jpg" class="img-circle elevation-2" alt="User Image" style="width: 2.5rem; height: 2.5rem;">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">Usuario Administrador</a>
+                            <a href="#" class="d-block">Usuario</a>
                         </div>
                     </div>
 
@@ -435,23 +420,11 @@
                                     <i class="nav-icon fa fa-plug"></i>
                                     <p>Conexión <i class="right fa fa-angle-left"></i></p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none; padding-left: 15px;">
+                                <ul class="nav nav-treeview" style="padding-left: 15px;">
                                     <li class="nav-item">
                                         <a href="assets/config_mqtt.html" class="nav-link">
                                             <i class="fa fa-wifi nav-icon"></i>
                                             <p>MQTT</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-globe nav-icon"></i>
-                                            <p>HTTP</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-ellipsis-h nav-icon"></i>
-                                            <p>Otros</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -471,61 +444,24 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a href="quienes-somos.html" class="nav-link">
+                                    <i class="nav-icon fa fa-users"></i>
+                                    <p>Quiénes somos</p>
+                                </a>
+                            </li>
+
 
                             <li class="nav-header" style="color: #6c757d; font-size: 0.85rem; padding-top: 15px;">SISTEMA</li>
 
                             <li class="nav-item">
-                                <a href="login.html" class="nav-link exit">
+                                <a href="index.html" class="nav-link exit">
                                     <i class="nav-icon fa fa-sign-out text-danger"></i>
                                     <p>Cerrar Sesión</p>
                                 </a>
                             </li>
                         </ul>
 
-                        <!-- ===== Team Section ===== -->
-                        <div class="sidebar-team-section">
-                            <div class="sidebar-team-title">
-                                <i class="fa fa-users" style="color: #3AAFA9; font-size: 0.75rem;"></i>
-                                Equipo de Desarrollo
-                            </div>
-                            <div class="team-members-grid">
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Emerson Bolaños · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 2.jpg" alt="Ana García">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Diana Scarpeta · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 3.jpg" alt="Carlos López">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Valey Jimenez · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 4.jpg" alt="María Torres">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Juan Papamija · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 5.jpg" alt="Luis Ramos">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Sharit · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 6.jpg" alt="Sara Méndez">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Felipe · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 7.jpg" alt="Pedro Núñez">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Santiago · DEV</div>
-                                    <img src="assets/images/Avatars/Avatar 8.jpg" alt="Pedro Núñez">
-                                    <span class="team-member-role">DEV</span>
-                                </div>
-                            </div>
-                        </div>
                     </nav>
                 </div>
             </div>
@@ -570,10 +506,10 @@
                         <div class="carousel-item" style="height: 300px; background-color: #0b132b; background-image: url('assets/images/carousel_bg.png'); background-size: cover; background-position: center;">
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0b132b; opacity: 0.6;"></div>
                             <div class="carousel-caption d-none d-md-block" style="text-align: left; left: 5%; bottom: auto; top: 50%; transform: translateY(-50%); width: 50%; position: relative; z-index: 1;">
-                                <span class="badge" style="background-color: rgba(49, 27, 146, 0.7); color: #b388ff; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(179, 136, 255, 0.3);">Análisis de Datos</span>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Visualiza métricas y gráficos</h2>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #b388ff; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">con precisión</h2>
-                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Exporta tus reportes en PDF y Excel para un análisis detallado del entorno.</p>
+                                <span class="badge" style="background-color: rgba(49, 27, 146, 0.7); color: #b388ff; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(179, 136, 255, 0.3);">Protocolo MQTT</span>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Enciende y apaga</h2>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #b388ff; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">tus LEDs</h2>
+                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Envía comandos ON y OFF desde el panel web hacia Arduino o ESP32.</p>
                             </div>
                         </div>
 
@@ -581,10 +517,10 @@
                         <div class="carousel-item" style="height: 300px; background-color: #0b132b; background-image: url('assets/images/carousel_bg.png'); background-size: cover; background-position: center;">
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0b132b; opacity: 0.6;"></div>
                             <div class="carousel-caption d-none d-md-block" style="text-align: left; left: 5%; bottom: auto; top: 50%; transform: translateY(-50%); width: 50%; position: relative; z-index: 1;">
-                                <span class="badge" style="background-color: rgba(191, 54, 12, 0.7); color: #ff9e80; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(255, 158, 128, 0.3);">Alertas</span>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Recibe notificaciones</h2>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #ff9e80; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">al instante</h2>
-                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Configura umbrales de sensores para proteger tus dispositivos Arduino.</p>
+                                <span class="badge" style="background-color: rgba(191, 54, 12, 0.7); color: #ff9e80; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(255, 158, 128, 0.3);">Estado sincronizado</span>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Consulta el estado</h2>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #ff9e80; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">de cada LED</h2>
+                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">El dispositivo publica LED1/status, LED2/status y LED3/status en tiempo real.</p>
                             </div>
                         </div>
                     </div>
@@ -678,13 +614,6 @@
                                             console.log('Subscribed to LED3 status topic');
                                         }
                                     });
-
-                                    // Suscribirse también al tópico de temperatura
-                                    mqttClient.subscribe('sensor/temperatura', (err) => {
-                                        if (!err) {
-                                            console.log('Subscribed to temperature topic: sensor/temperatura');
-                                        }
-                                    });
                                 });
 
                                 // Handle incoming messages
@@ -693,17 +622,7 @@
 
                                     const payload = message.toString();
 
-                                    // Procesar según el tópico
-                                    if (receivedTopic === 'sensor/temperatura') {
-                                        // Mensaje de temperatura para el gráfico
-                                        const numValue = parseFloat(payload);
-                                        if (!isNaN(numValue)) {
-                                            if(typeof updateChart === 'function') {
-                                                updateChart(numValue);
-                                                console.log('Temperature updated:', numValue, '°C');
-                                            }
-                                        }
-                                    } else if (receivedTopic === 'LED1/status') {
+                                    if (receivedTopic === 'LED1/status') {
                                         // Estado del LED1 desde ESP32
                                         if (payload === 'ON' || payload === 'OFF') {
                                             updateLedUIState(1, payload === 'ON');
@@ -716,27 +635,9 @@
                                             addActivityLog('Actualización LED2 (MQTT)', 'Estado remoto: ' + payload, payload === 'ON');
                                         }
                                     } else if (receivedTopic === 'LED3/status') {
-                                        // Estado del LED3 desde ESP32
                                         if (payload === 'ON' || payload === 'OFF') {
                                             updateLedUIState(3, payload === 'ON');
                                             addActivityLog('Actualización LED3 (MQTT)', 'Estado remoto: ' + payload, payload === 'ON');
-                                        }
-                                    } else {
-                                        // Intentar parsear como número o JSON para compatibilidad
-                                        const numValue = parseFloat(payload);
-                                        if (!isNaN(numValue) && payload.trim() === numValue.toString()) {
-                                            if(typeof updateChart === 'function') updateChart(numValue);
-                                        } else {
-                                            try {
-                                                const data = JSON.parse(payload);
-                                                if (data.temperatura !== undefined) {
-                                                    if(typeof updateChart === 'function') updateChart(parseFloat(data.temperatura));
-                                                } else if (data.value !== undefined) {
-                                                    if(typeof updateChart === 'function') updateChart(parseFloat(data.value));
-                                                }
-                                            } catch(e) {
-                                                // No es JSON ni número simple
-                                            }
                                         }
                                     }
                                 });
@@ -955,83 +856,11 @@
                             </div>
                         </div>
 
-                        <!-- Real-time Chart Section -->
-                        <div class="row mb-4" id="chart-section" style="scroll-margin-top: 70px;">
-                            <div class="col-12">
-                                <div class="card" style="border-radius: 14px; border: 1px solid #eaeaea; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
-                                    <div class="card-header bg-white border-0 pt-4 pb-2" style="border-radius: 14px 14px 0 0;">
-                                        <h3 class="card-title font-weight-bold" style="color: #333; font-size: 1.3rem;">
-                                            <i class="fa fa-line-chart text-success mr-2"></i>Monitorización en Tiempo Real
-                                        </h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div style="height: 300px;">
-                                            <canvas id="realtimeChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <!-- /LED Cards Row -->
 
-                        <script>
-                            var realtimeChart;
-                            document.addEventListener("DOMContentLoaded", function() {
-                                var ctx = document.getElementById('realtimeChart');
-                                if (ctx && typeof Chart !== 'undefined') {
-                                    realtimeChart = new Chart(ctx.getContext('2d'), {
-                                        type: 'line',
-                                        data: {
-                                            labels: [], 
-                                            datasets: [{
-                                                label: 'Temperatura (°C) / Sensor',
-                                                data: [],
-                                                borderColor: '#43a047',
-                                                backgroundColor: 'rgba(67, 160, 71, 0.1)',
-                                                borderWidth: 2,
-                                                pointBackgroundColor: '#43a047',
-                                                pointRadius: 4,
-                                                fill: true
-                                            }]
-                                        },
-                                        options: {
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            scales: {
-                                                xAxes: [{
-                                                    display: true,
-                                                    scaleLabel: { display: true, labelString: 'Hora' }
-                                                }],
-                                                yAxes: [{
-                                                    display: true,
-                                                    scaleLabel: { display: true, labelString: 'Valor' },
-                                                    ticks: { suggestedMin: 15, suggestedMax: 35 }
-                                                }]
-                                            },
-                                            animation: { duration: 0 }
-                                        }
-                                    });
-                                }
-                            });
-
-                            function updateChart(value) {
-                                if (!realtimeChart) return;
-                                
-                                const now = new Date();
-                                const timeStr = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-                                
-                                realtimeChart.data.labels.push(timeStr);
-                                realtimeChart.data.datasets[0].data.push(value);
-                                
-                                if (realtimeChart.data.labels.length > 15) {
-                                    realtimeChart.data.labels.shift();
-                                    realtimeChart.data.datasets[0].data.shift();
-                                }
-                                realtimeChart.update();
-                            }
-                        </script>
-
-                        <!-- Recent Activities Section -->
-                    <div id="activities-section" class="row" style="scroll-margin-top: 70px;">
+                    <!-- Recent Activities Section -->
+                    <div id="activities-section" class="row mb-4" style="scroll-margin-top: 70px;">
                         <div class="col-12 mb-3">
                             <div class="recent-activity-card">
                                 <div class="card-header border-0 bg-transparent" style="padding: 20px 24px 10px;">
@@ -1163,7 +992,7 @@
                     <div class="row mt-5 mb-3">
                         <div class="col-12 text-center" style="color: #6c757d; font-size: 0.9rem;">
                             <hr style="border-top: 1px solid #eaeaea; margin-bottom: 20px;">
-                            <strong>&copy; 2026 Panel de Control IoT.</strong> Diseñado para monitoreo MQTT de ESP32 y Arduino.
+                            <strong>&copy; 2026 Panel de Control IoT.</strong> Control de LEDs vía MQTT con Arduino y ESP32.
                         </div>
                     </div>
                 </div>
@@ -1171,52 +1000,12 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script>$.widget.bridge('uibutton', $.ui.button)</script>
-    <script src="assets/js/select2.full.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/jquery.knob.js"></script>
-    <script src="assets/js/bootstrap3-wysihtml5.all.min.js"></script>
     <script src="assets/js/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/fastclick.js"></script>
-    <script src="assets/js/adminlte.js"></script>
-    <script src="assets/js/Chart.min.js"></script>
-
-    <script src="assets/js/jquery.easing.min.js"></script>
-    <script src="assets/js/ruang-admin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="assets/js/fastclick.min.js"></script>
+    <script src="assets/js/adminlte.min.js"></script>
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-
-    <script>
-        var customOptions = {
-            placeholder: "day/month/year"
-            , twodigit: false
-            , closeAfterSelect: false
-            , nextButtonIcon: "fa fa-arrow-circle-right"
-            , previousButtonIcon: "fa fa-arrow-circle-left"
-            , buttonsColor: "green"
-            , forceFarsiDigits: true
-            , markToday: true
-            , markHolidays: true
-            , highlightSelectedDay: true
-            , sync: true
-            , gotoToday: true
-        }
-        if (document.getElementById('date1')) kamaDatepicker('date1', customOptions);
-        if (document.getElementById('date2')) kamaDatepicker('date2', customOptions);
-    </script>
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="assets/js/morris.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $(function () {
-            $('.select2').select2()
-        })
-    </script>
 </body>
 </html>

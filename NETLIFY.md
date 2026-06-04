@@ -1,9 +1,12 @@
 # Configuración para despliegue en Netlify
 
 ## Estructura del proyecto
-- index.html (página principal/login)
-- dashboard.html (panel de control)
-- assets/ (todos los recursos estáticos)
+- `index.html` — login (redirige al dashboard)
+- `dashboard.html` — control MQTT de 3 LEDs
+- `assets/config_mqtt.html` — configuración del broker
+- `quienes-somos.html` — información del equipo
+- `simulador_mqtt.py` — simulador del dispositivo (pruebas locales)
+- `assets/esp32_mqtt_complete/` — firmware ESP32 + simulación Wokwi
 
 ## Configuración en Netlify
 

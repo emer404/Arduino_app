@@ -1,32 +1,80 @@
-@font-face {
-    font-family: 'Iran-SansDN';
-    src: url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.eot');
-    src: url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.eot?#iefix') format('embedded-opentype'), url('..IRANSansDN/IRANSansDN.woff') format('woff'), url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.ttf') format('truetype'), url('../fonts/IRANsanDN/IRANSansDN/IRANSansDN.svg') format('svg');
-    font-weight: 500px;
-    font-style: normal;
+/* ============================================================
+   GOOGLE FONTS — Inter (body) + Poppins (headings)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/*---------------------------------- Font System ---------------------------------- */
+
+/* === Base / Body === */
+body,
+p, span, a, li, td, th, label, input, select, textarea, button,
+.nav-link, .nav-header, .brand-text,
+.badge, .alert, .form-control,
+.activity-desc, .activity-time, .status-date,
+.card-body, .card-footer,
+.sidebar, .main-header, .content-wrapper {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
 }
 
-@font-face {
-    font-family: 'Iran-SansDN-Bold';
-    src: url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.eot');
-    src: url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.woff') format('woff'), url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.ttf') format('truetype'), url('../fonts/IRANsanDN/IRANSansDN-Bold/IRANSansDN-Bold.svg') format('svg');
-    font-weight: bold;
-    font-style: bold;
+/* === Headings === */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.card-title, .login100-form-title,
+.device-meta h4,
+.activity-title span:first-child,
+.brand-text,
+.content-header h1 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
 }
 
-@font-face {
-    font-family: 'Iran-SansDN-Light';
-    src: url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.eot');
-    src: url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.eot?#iefix') format('embedded-opentype'), url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.woff') format('woff'), url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.ttf') format('truetype'), url('../fonts/IRANsanDN/IRANSansDN_Light/IRANSansDN_Light.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
+/* === Sidebar nav text === */
+.nav-sidebar .nav-link p,
+.nav-header {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em;
 }
 
+/* === Brand / Logo text === */
+.brand-text {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em;
+}
 
-/*---------------------------------- End of fonts ---------------------------------- */
+/* === Buttons === */
+.btn, button[type="submit"] {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+}
+
+/* === Status badges & small labels === */
+.status-label, .activity-title {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+}
+
+/* === Form inputs === */
+.form-control, .input100 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400 !important;
+}
+
+/* === Page content header === */
+.content-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700 !important;
+    color: #1a1a2e;
+}
 
 body {
-    font-family: 'Iran-SansDN';
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .ltr {

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quiénes somos | control de arduino</title>
+
+    <link rel="stylesheet" href="assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="assets/images/icons/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/custom-style.css">
+
+    <style>
+        .device-icon-container {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .icon-plug { background-color: #f3e5f5; color: #8e24aa; }
+        .about-card {
+            border-radius: 14px;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            background-color: #fff;
+            overflow: hidden;
+        }
+        .group-photo-box {
+            min-height: 360px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
+            border: 2px dashed #90caf9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #495057;
+        }
+        .group-photo-box i {
+            font-size: 64px;
+            color: #3AAFA9;
+            margin-bottom: 14px;
+        }
+        .team-profile-card {
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            background-color: #fff;
+            padding: 20px;
+            height: 100%;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+        .team-profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .team-profile-card img {
+            width: 74px;
+            height: 74px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e8f5e9;
+            margin-bottom: 12px;
+        }
+        .team-profile-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 4px;
+        }
+        .team-profile-card p {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+        .sidebar-team-section {
+            margin: 10px 8px 8px 8px;
+            padding: 14px 12px 10px 12px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+        }
+        .sidebar-team-title {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .team-members-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+        .team-member-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .team-member-item img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.15);
+            transition: all 0.25s ease;
+            filter: brightness(0.9);
+        }
+        .team-member-item:hover img {
+            border-color: #3AAFA9;
+            transform: scale(1.15) translateY(-2px);
+            filter: brightness(1);
+            box-shadow: 0 4px 12px rgba(58,175,169,0.4);
+        }
+        .team-member-tooltip {
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20,20,30,0.95);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(58,175,169,0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 999;
+        }
+        .team-member-item:hover .team-member-tooltip {
+            opacity: 1;
+        }
+        .team-member-role {
+            font-size: 0.58rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 3px;
+            text-align: center;
+            max-width: 44px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <a href="dashboard.html" class="brand-link">
+                    <img src="assets/images/arduino-logo.png" alt="Logo" class="brand-image" style="opacity: .8; max-width: 150px; height: auto;">
+                </a>
+            </ul>
+        </nav>
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="dashboard.html" class="brand-link text-center">
+                <span class="brand-text font-weight-light text-center">control arduino</span>
+            </a>
+
+            <div class="sidebar">
+                <div>
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="assets/images/Avatars/Avatar 1.jpg" class="img-circle elevation-2" alt="User Image" style="width: 2.5rem; height: 2.5rem;">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">Usuario Administrador</a>
+                        </div>
+                    </div>
+
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="dashboard.html" class="nav-link">
+                                    <i class="nav-icon fa fa-home"></i>
+                                    <p>Inicio</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-header" style="color: #6c757d; font-size: 0.85rem; padding-top: 15px;">PANEL IOT</li>
+
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-plug"></i>
+                                    <p>Conexión <i class="right fa fa-angle-left"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview" style="padding-left: 15px;">
+                                    <li class="nav-item">
+                                        <a href="assets/config_mqtt.html" class="nav-link">
+                                            <i class="fa fa-wifi nav-icon"></i>
+                                            <p>MQTT</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="dashboard.html#control-section" class="nav-link">
+                                    <i class="nav-icon fa fa-sliders"></i>
+                                    <p>Control de Arduino</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="dashboard.html#activities-section" class="nav-link">
+                                    <i class="nav-icon fa fa-history"></i>
+                                    <p>Actividades Recientes</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="quienes-somos.html" class="nav-link active">
+                                    <i class="nav-icon fa fa-users"></i>
+                                    <p>Quiénes somos</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-header" style="color: #6c757d; font-size: 0.85rem; padding-top: 15px;">SISTEMA</li>
+
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link exit">
+                                    <i class="nav-icon fa fa-sign-out text-danger"></i>
+                                    <p>Cerrar Sesión</p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </aside>
+
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Quiénes somos</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="about-card mb-4">
+                        <div class="row no-gutters">
+                            <div class="col-lg-7 p-4">
+                                <div class="group-photo-box p-0" style="border: none; background: none; overflow: hidden;">
+                                    <img src="assets/images/equipo.jpg" alt="Foto del equipo de desarrollo" class="img-fluid w-100 h-100" style="border-radius: 12px; object-fit: cover; min-height: 360px;">
+                                </div>
+                            </div>
+                            <div class="col-lg-5 p-4 d-flex align-items-center">
+                                <div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="device-icon-container icon-plug mr-3">
+                                            <i class="fa fa-users"></i>
+                                        </div>
+                                        <div>
+                                            <h2 class="h4 font-weight-bold mb-1" style="color: #212529;">Nuestro equipo</h2>
+                                            <p class="mb-0 text-muted">Control de LEDs Arduino vía MQTT.</p>
+                                        </div>
+                                    </div>
+                                    <p style="color: #495057; line-height: 1.7;">
+                                        Somos un equipo especializado en ADSO, enfocado en la creación de soluciones robustas, para IoT.
+                                        diseñamos e implementamos sistemas integrados utilizando Arduino y microcontroladores ESP32, con control remoto de LEDs mediante el protocolo MQTT.
+                                    </p>
+                                    <p class="mb-0" style="color: #495057; line-height: 1.7;">
+                                        Este proyecto reúne diseño, programación y automatización para encender y apagar LEDs desde el panel web y registrar cada comando en tiempo real.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4 mb-3">
+                        <div class="col-12 text-center" style="color: #6c757d; font-size: 0.9rem;">
+                            <hr style="border-top: 1px solid #eaeaea; margin-bottom: 20px;">
+                            <strong>&copy; 2026 Panel de Control IoT.</strong> Control de LEDs vía MQTT con Arduino y ESP32.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/fastclick.min.js"></script>
+    <script src="assets/js/adminlte.min.js"></script>
+</body>
+</html>

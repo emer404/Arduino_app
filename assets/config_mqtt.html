@@ -9,21 +9,9 @@
 
     <title>control de arduino</title>
 
-    <!-- Theme style -->
     <link rel="stylesheet" href="css/adminlte.min.css">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="plugins/select2/select2.min.css">
     <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- library for persian date picker -->
-    <link type="text/css" rel="stylesheet" href="plugins/kamadatepicker/kamadatepicker.min.css" />
-    <script src="js/kamadatepicker.min.js"></script>
-    <script src="js/kamadatepicker.holidays.js"></script>
     <link rel="stylesheet" href="css/custom-style.css">
 
     <style>
@@ -369,7 +357,7 @@
             <!-- left logo -->
             <ul class="navbar-nav mr-auto">
                 <a href="#" class="brand-link">
-                    <img src="assets/images/arduino-logo.png" alt="Logo" class="brand-image" style="opacity: .8; max-width: 150px; height: auto;">
+                    <img src="images/arduino-logo.png" alt="Logo" class="brand-image" style="opacity: .8; max-width: 150px; height: auto;">
                 </a>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -393,7 +381,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="assets/images/Avatars/Avatar 1.jpg" class="img-circle elevation-2" alt="User Image" style="width: 2.5rem; height: 2.5rem;">
+                            <img src="images/Avatars/Avatar 1.jpg" class="img-circle elevation-2" alt="User Image" style="width: 2.5rem; height: 2.5rem;">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">Usuario Administrador</a>
@@ -413,44 +401,39 @@
 
                             <li class="nav-header" style="color: #6c757d; font-size: 0.85rem; padding-top: 15px;">PANEL IOT</li>
 
-                            <li class="nav-item has-treeview">
+                            <li class="nav-item has-treeview menu-open">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fa fa-plug"></i>
                                     <p>Conexión <i class="right fa fa-angle-left"></i></p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none; padding-left: 15px;">
+                                <ul class="nav nav-treeview" style="padding-left: 15px;">
                                     <li class="nav-item">
-                                        <a href="config_mqtt.html" class="nav-link">
+                                        <a href="config_mqtt.html" class="nav-link active">
                                             <i class="fa fa-wifi nav-icon"></i>
                                             <p>MQTT</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-globe nav-icon"></i>
-                                            <p>HTTP</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-ellipsis-h nav-icon"></i>
-                                            <p>Otros</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#control-section" class="nav-link">
+                                <a href="../dashboard.html#control-section" class="nav-link">
                                     <i class="nav-icon fa fa-sliders"></i>
                                     <p>Control de Arduino</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#activities-section" class="nav-link">
+                                <a href="../dashboard.html#activities-section" class="nav-link">
                                     <i class="nav-icon fa fa-history"></i>
                                     <p>Actividades Recientes</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="../quienes-somos.html" class="nav-link">
+                                    <i class="nav-icon fa fa-users"></i>
+                                    <p>Quiénes somos</p>
                                 </a>
                             </li>
 
@@ -458,52 +441,13 @@
                             <li class="nav-header" style="color: #6c757d; font-size: 0.85rem; padding-top: 15px;">SISTEMA</li>
 
                             <li class="nav-item">
-                                <a href="login.html" class="nav-link exit">
+                                <a href="../index.html" class="nav-link exit">
                                     <i class="nav-icon fa fa-sign-out text-danger"></i>
                                     <p>Cerrar Sesión</p>
                                 </a>
                             </li>
                         </ul>
 
-                        <!-- ===== Team Section ===== -->
-                        <div class="sidebar-team-section">
-                            <div class="sidebar-team-title">
-                                <i class="fa fa-users" style="color: #3AAFA9; font-size: 0.75rem;"></i>
-                                Equipo de Desarrollo
-                            </div>
-                            <div class="team-members-grid">
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Ana García · Frontend</div>
-                                    <img src="assets/images/Avatars/Avatar 2.jpg" alt="Ana García">
-                                    <span class="team-member-role">Frontend</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Carlos López · Backend</div>
-                                    <img src="assets/images/Avatars/Avatar 3.jpg" alt="Carlos López">
-                                    <span class="team-member-role">Backend</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">María Torres · IoT</div>
-                                    <img src="assets/images/Avatars/Avatar 4.jpg" alt="María Torres">
-                                    <span class="team-member-role">IoT</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Luis Ramos · Hardware</div>
-                                    <img src="assets/images/Avatars/Avatar 5.jpg" alt="Luis Ramos">
-                                    <span class="team-member-role">Hardware</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Sara Méndez · QA</div>
-                                    <img src="assets/images/Avatars/Avatar 6.jpg" alt="Sara Méndez">
-                                    <span class="team-member-role">QA</span>
-                                </div>
-                                <div class="team-member-item">
-                                    <div class="team-member-tooltip">Pedro Núñez · DevOps</div>
-                                    <img src="assets/images/Avatars/Avatar 7.jpg" alt="Pedro Núñez">
-                                    <span class="team-member-role">DevOps</span>
-                                </div>
-                            </div>
-                        </div>
                     </nav>
                 </div>
             </div>
@@ -534,7 +478,7 @@
                         <li data-target="#heroCarousel" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); height: 300px;">
-                        <div class="carousel-item active" style="height: 300px; background-color: #0b132b; background-image: url('assets/images/carousel_bg.png'); background-size: cover; background-position: center;">
+                        <div class="carousel-item active" style="height: 300px; background-color: #0b132b; background-image: url('images/carousel_bg.png'); background-size: cover; background-position: center;">
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0b132b; opacity: 0.6;"></div>
                             <div class="carousel-caption d-none d-md-block" style="text-align: left; left: 5%; bottom: auto; top: 50%; transform: translateY(-50%); width: 50%; position: relative; z-index: 1;">
                                 <span class="badge" style="background-color: rgba(0, 77, 64, 0.7); color: #00e676; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(0, 230, 118, 0.3);">Sistema Inteligente</span>
@@ -545,24 +489,24 @@
                         </div>
 
                         <!-- Slide 2 -->
-                        <div class="carousel-item" style="height: 300px; background-color: #0b132b; background-image: url('assets/images/carousel_bg.png'); background-size: cover; background-position: center;">
+                        <div class="carousel-item" style="height: 300px; background-color: #0b132b; background-image: url('images/carousel_bg.png'); background-size: cover; background-position: center;">
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0b132b; opacity: 0.6;"></div>
                             <div class="carousel-caption d-none d-md-block" style="text-align: left; left: 5%; bottom: auto; top: 50%; transform: translateY(-50%); width: 50%; position: relative; z-index: 1;">
-                                <span class="badge" style="background-color: rgba(49, 27, 146, 0.7); color: #b388ff; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(179, 136, 255, 0.3);">Análisis de Datos</span>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Visualiza métricas y gráficos</h2>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #b388ff; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">con precisión</h2>
-                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Exporta tus reportes en PDF y Excel para un análisis detallado del entorno.</p>
+                                <span class="badge" style="background-color: rgba(49, 27, 146, 0.7); color: #b388ff; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(179, 136, 255, 0.3);">Protocolo MQTT</span>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Enciende y apaga</h2>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #b388ff; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">tus LEDs</h2>
+                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Envía comandos ON y OFF desde el panel web hacia Arduino o ESP32.</p>
                             </div>
                         </div>
 
                         <!-- Slide 3 -->
-                        <div class="carousel-item" style="height: 300px; background-color: #0b132b; background-image: url('assets/images/carousel_bg.png'); background-size: cover; background-position: center;">
+                        <div class="carousel-item" style="height: 300px; background-color: #0b132b; background-image: url('images/carousel_bg.png'); background-size: cover; background-position: center;">
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0b132b; opacity: 0.6;"></div>
                             <div class="carousel-caption d-none d-md-block" style="text-align: left; left: 5%; bottom: auto; top: 50%; transform: translateY(-50%); width: 50%; position: relative; z-index: 1;">
-                                <span class="badge" style="background-color: rgba(191, 54, 12, 0.7); color: #ff9e80; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(255, 158, 128, 0.3);">Alertas</span>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Recibe notificaciones</h2>
-                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #ff9e80; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">al instante</h2>
-                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Configura umbrales de sensores para proteger tus dispositivos Arduino.</p>
+                                <span class="badge" style="background-color: rgba(191, 54, 12, 0.7); color: #ff9e80; padding: 8px 16px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 20px; border: 1px solid rgba(255, 158, 128, 0.3);">Estado sincronizado</span>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; margin-bottom: 5px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Consulta el estado</h2>
+                                <h2 style="font-weight: 700; font-size: 2.4rem; color: #ff9e80; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">de cada LED</h2>
+                                <p style="font-size: 1.15rem; color: #cfd8dc; font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">El dispositivo publica LED1/status, LED2/status y LED3/status en tiempo real.</p>
                             </div>
                         </div>
                     </div>
@@ -758,7 +702,7 @@
                     <div class="row mt-5 mb-3">
                         <div class="col-12 text-center" style="color: #6c757d; font-size: 0.9rem;">
                             <hr style="border-top: 1px solid #eaeaea; margin-bottom: 20px;">
-                            <strong>&copy; 2026 Panel de Control IoT.</strong> Diseñado para monitoreo MQTT de ESP32 y Arduino.
+                            <strong>&copy; 2026 Panel de Control IoT.</strong> Control de LEDs vía MQTT con Arduino y ESP32.
                         </div>
                     </div>
                 </div>
@@ -766,52 +710,11 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script>$.widget.bridge('uibutton', $.ui.button)</script>
-    <script src="js/select2.full.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.knob.js"></script>
-    <script src="js/bootstrap3-wysihtml5.all.min.js"></script>
     <script src="js/jquery.slimscroll.min.js"></script>
-    <script src="js/fastclick.js"></script>
-    <script src="js/adminlte.js"></script>
-    <script src="js/Chart.min.js"></script>
-
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/ruang-admin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-
-    <script>
-        var customOptions = {
-            placeholder: "day/month/year"
-            , twodigit: false
-            , closeAfterSelect: false
-            , nextButtonIcon: "fa fa-arrow-circle-right"
-            , previousButtonIcon: "fa fa-arrow-circle-left"
-            , buttonsColor: "green"
-            , forceFarsiDigits: true
-            , markToday: true
-            , markHolidays: true
-            , highlightSelectedDay: true
-            , sync: true
-            , gotoToday: true
-        }
-        if (document.getElementById('date1')) kamaDatepicker('date1', customOptions);
-        if (document.getElementById('date2')) kamaDatepicker('date2', customOptions);
-    </script>
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="js/morris.min.js"></script>
+    <script src="js/fastclick.min.js"></script>
+    <script src="js/adminlte.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $(function () {
-            $('.select2').select2()
-        })
-    </script>
 </body>
 </html>

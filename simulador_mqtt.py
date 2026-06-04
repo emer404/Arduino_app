@@ -1,214 +1,228 @@
+"""
+==========================================================
+  Simulador MQTT — ESP32/Arduino  (Python)
+  Emula el comportamiento del microcontrolador real.
+  Suscribe a LED1/control, LED2/control, LED3/control
+  y publica respuestas en LED1/status, LED2/status, LED3/status
+==========================================================
+
+  REQUISITO: pip install paho-mqtt
+
+  USO:
+    1. Abrir una terminal y ejecutar:  python3 simulador_mqtt.py
+    2. Abrir el dashboard en el navegador
+    3. En el dashboard: hacer clic en "Conectar"
+    4. Encender/apagar los LEDs desde el dashboard
+    5. Ver en la terminal cómo responde el simulador
+
+  NOTAS:
+    - El broker debe coincidir con el que configures en el dashboard.
+    - La web usa WebSockets (puerto 8884 con SSL en HiveMQ).
+    - Este simulador usa TCP directo (puerto 1883), ambos llegan al mismo broker.
+==========================================================
+"""
+
 import paho.mqtt.client as mqtt
 import time
+import sys
 import random
-import threading
+import string
+from datetime import datetime
 
-# ==========================================
-# CONFIGURACIÓN DEL BROKER (Debe coincidir con el ESP32 y la web)
-# ==========================================
+# ──────────────────────────────────────────────
+# CONFIGURACIÓN — debe coincidir con el dashboard
+# ──────────────────────────────────────────────
 MQTT_BROKER = "broker.hivemq.com"
-# Nota: Python usa el puerto TCP estándar (1883), mientras que la web usa WebSockets (8000)
-MQTT_PORT = 1883 
+MQTT_PORT   = 1883          # TCP directo (Python usa este; la web usa WSS 8884)
+KEEPALIVE   = 60
 
-# Tópicos MQTT (deben coincidir con el ESP32)
-MQTT_TOPIC_LED1 = "LED1/control"      # Tópico para comandos de control LED1
-MQTT_TOPIC_LED2 = "LED2/control"      # Tópico para comandos de control LED2
-MQTT_TOPIC_LED3 = "LED3/control"      # Tópico para comandos de control LED3
-MQTT_TOPIC_LED1_STATUS = "LED1/status" # Tópico estado LED1
-MQTT_TOPIC_LED2_STATUS = "LED2/status" # Tópico estado LED2
-MQTT_TOPIC_LED3_STATUS = "LED3/status" # Tópico estado LED3
-MQTT_TOPIC_TEMPERATURA = "sensor/temperatura"  # Tópico para datos de temperatura
+TOPICS_CONTROL = {
+    "LED1/control": 1,
+    "LED2/control": 2,
+    "LED3/control": 3,
+}
+TOPICS_STATUS = {
+    1: "LED1/status",
+    2: "LED2/status",
+    3: "LED3/status",
+}
 
-# Estados simulados de los 3 LEDs
-simulated_led1_state = False  # False = OFF, True = ON
-simulated_led2_state = False  # False = OFF, True = ON
-simulated_led3_state = False  # False = OFF, True = ON
-simulated_temperature = 25.0
+# ──────────────────────────────────────────────
+# ESTADO GLOBAL DE LOS LEDs
+# ──────────────────────────────────────────────
+led_state = {1: False, 2: False, 3: False}   # False = OFF, True = ON
+is_connected = False
 
-# ==========================================
-# FUNCIONES CALLBACK MQTT
-# ==========================================
+# ──────────────────────────────────────────────
+# HELPERS VISUALES
+# ──────────────────────────────────────────────
+COLORS = {
+    "green":  "\033[92m",
+    "red":    "\033[91m",
+    "yellow": "\033[93m",
+    "cyan":   "\033[96m",
+    "white":  "\033[97m",
+    "gray":   "\033[90m",
+    "reset":  "\033[0m",
+    "bold":   "\033[1m",
+}
 
+LED_COLOR = {
+    1: "\033[91m",   # Rojo  (LED1)
+    2: "\033[92m",   # Verde (LED2)
+    3: "\033[94m",   # Azul  (LED3)
+}
+
+def c(text, color):
+    return f"{COLORS[color]}{text}{COLORS['reset']}"
+
+def now():
+    return datetime.now().strftime("%H:%M:%S")
+
+def print_header():
+    print(c("\n╔══════════════════════════════════════════════════╗", "cyan"))
+    print(c("║    🔌  Simulador MQTT — ESP32/Arduino            ║", "cyan"))
+    print(c("╚══════════════════════════════════════════════════╝", "cyan"))
+    print(f"   Broker : {c(MQTT_BROKER, 'white')} : {c(str(MQTT_PORT), 'white')}")
+    print(f"   Tópicos: {c('LED1,LED2,LED3 /control  →  /status', 'gray')}")
+    print(c("────────────────────────────────────────────────────", "cyan"))
+
+def print_led_dashboard():
+    """Muestra el estado actual de los 3 LEDs en la terminal."""
+    led_labels = {1: "LED 1 (D3) — Rojo ", 2: "LED 2 (D5) — Verde", 3: "LED 3 (D7) — Azul "}
+    print()
+    print(c("  ┌─────────────────────────────────────────────┐", "cyan"))
+    print(c("  │           Estado actual de LEDs             │", "cyan"))
+    print(c("  ├─────────────────────────────────────────────┤", "cyan"))
+    for num in [1, 2, 3]:
+        state = led_state[num]
+        icon  = "●" if state else "○"
+        label = "ON " if state else "OFF"
+        color = LED_COLOR[num] if state else "gray"
+        print(f"  │  {LED_COLOR[num]}{icon}{COLORS['reset']}  {led_labels[num]}  →  {c(label, color)}           │")
+    print(c("  └─────────────────────────────────────────────┘", "cyan"))
+    print()
+
+def log(msg, level="info"):
+    ts = c(f"[{now()}]", "gray")
+    icons = {"info": c("ℹ", "cyan"), "ok": c("✔", "green"), "err": c("✘", "red"), "msg": c("↓", "yellow")}
+    icon = icons.get(level, "·")
+    print(f"  {ts} {icon}  {msg}")
+
+# ──────────────────────────────────────────────
+# CALLBACKS MQTT
+# ──────────────────────────────────────────────
 def on_connect(client, userdata, flags, rc):
+    global is_connected
     if rc == 0:
-        print(f"✅ Conectado exitosamente al broker MQTT ({MQTT_BROKER})")
-        # Suscribirse a los tópicos de control de los 3 LEDs
-        client.subscribe(MQTT_TOPIC_LED1)
-        print(f"📡 Suscrito al tópico de control LED1: {MQTT_TOPIC_LED1}")
-
-        client.subscribe(MQTT_TOPIC_LED2)
-        print(f"📡 Suscrito al tópico de control LED2: {MQTT_TOPIC_LED2}")
-
-        client.subscribe(MQTT_TOPIC_LED3)
-        print(f"📡 Suscrito al tópico de control LED3: {MQTT_TOPIC_LED3}")
-
-        # Publicar estados iniciales
-        publish_led_states()
+        is_connected = True
+        log(c(f"Conectado al broker  {MQTT_BROKER}:{MQTT_PORT}", "green"), "ok")
+        # Suscribirse a todos los tópicos de control
+        for topic in TOPICS_CONTROL:
+            client.subscribe(topic)
+            log(f"Suscrito a  {c(topic, 'yellow')}", "info")
+        # Publicar estado inicial para sincronizar con el dashboard
+        publish_all_states(client)
+        print_led_dashboard()
     else:
-        print(f"❌ Error al conectar, código: {rc}")
-
-def on_message(client, userdata, msg):
-    global simulated_led1_state, simulated_led2_state, simulated_led3_state
-    topic = msg.topic
-    payload = msg.payload.decode()
-
-    print(f"📨 Mensaje recibido en '{topic}': {payload}")
-
-    # Procesar comandos de control para cada LED
-    if topic == MQTT_TOPIC_LED1:
-        process_led_command(payload, 1, simulated_led1_state, MQTT_TOPIC_LED1_STATUS)
-    elif topic == MQTT_TOPIC_LED2:
-        process_led_command(payload, 2, simulated_led2_state, MQTT_TOPIC_LED2_STATUS)
-    elif topic == MQTT_TOPIC_LED3:
-        process_led_command(payload, 3, simulated_led3_state, MQTT_TOPIC_LED3_STATUS)
-    else:
-        print(f"⚠️ Tópico no reconocido: {topic}")
-
-def on_publish(client, userdata, mid):
-    # print(f"📤 Mensaje publicado con ID: {mid}")
-    pass
+        errores = {
+            1: "Protocolo incorrecto",
+            2: "ID de cliente rechazado",
+            3: "Servidor no disponible",
+            4: "Usuario/contraseña incorrectos",
+            5: "No autorizado",
+        }
+        log(c(f"Error de conexión: {errores.get(rc, f'código {rc}')}", "red"), "err")
 
 def on_disconnect(client, userdata, rc):
+    global is_connected
+    is_connected = False
     if rc != 0:
-        print(f"❌ Desconectado inesperadamente, código: {rc}")
+        log(c(f"Desconectado inesperadamente (código {rc}). Reconectando...", "yellow"), "err")
 
-# ==========================================
-# FUNCIONES DE PROCESAMIENTO Y PUBLICACIÓN
-# ==========================================
+def on_message(client, userdata, msg):
+    topic   = msg.topic
+    payload = msg.payload.decode().strip().upper()
 
-def process_led_command(payload, led_num, state_var, status_topic):
-    """Procesa comandos para un LED específico"""
-    global simulated_led1_state, simulated_led2_state, simulated_led3_state
+    log(f"Recibido en {c(topic, 'yellow')} → {c(payload, 'white')}", "msg")
 
-    if payload.upper() == "ON":
-        new_state = True
-        print(f"💡 Encendiendo LED{led_num}...")
-    elif payload.upper() == "OFF":
-        new_state = False
-        print(f"💡 Apagando LED{led_num}...")
-    elif payload.upper() == "TOGGLE":
-        new_state = not state_var
-        print(f"💡 Alternando LED{led_num}...")
-    else:
-        print(f"⚠️ Comando no reconocido: {payload}")
+    if topic not in TOPICS_CONTROL:
+        log(f"Tópico no reconocido: {topic}", "err")
         return
 
-    # Actualizar el estado global correspondiente
-    if led_num == 1:
-        simulated_led1_state = new_state
-    elif led_num == 2:
-        simulated_led2_state = new_state
-    elif led_num == 3:
-        simulated_led3_state = new_state
+    led_num = TOPICS_CONTROL[topic]
 
-    # Publicar el estado
-    state_message = "ON" if new_state else "OFF"
-    client.publish(status_topic, state_message)
-    print(f"📤 Estado LED{led_num} publicado: {state_message}")
+    if payload == "ON":
+        led_state[led_num] = True
+    elif payload == "OFF":
+        led_state[led_num] = False
+    elif payload == "TOGGLE":
+        led_state[led_num] = not led_state[led_num]
+    else:
+        log(c(f"Comando no reconocido: '{payload}' (usa ON, OFF o TOGGLE)", "red"), "err")
+        return
 
-def publish_led_states():
-    """Publica los estados de todos los LEDs"""
-    state1 = "ON" if simulated_led1_state else "OFF"
-    state2 = "ON" if simulated_led2_state else "OFF"
-    state3 = "ON" if simulated_led3_state else "OFF"
+    # Publicar el nuevo estado de vuelta al dashboard
+    new_state_str = "ON" if led_state[led_num] else "OFF"
+    status_topic  = TOPICS_STATUS[led_num]
+    client.publish(status_topic, new_state_str, retain=True)
 
-    client.publish(MQTT_TOPIC_LED1_STATUS, state1)
-    client.publish(MQTT_TOPIC_LED2_STATUS, state2)
-    client.publish(MQTT_TOPIC_LED3_STATUS, state3)
+    color = "green" if led_state[led_num] else "red"
+    log(f"LED{led_num} → {c(new_state_str, color)}  (publicado en {c(status_topic, 'yellow')})", "ok")
 
-    print("📤 Estados iniciales publicados:")
-    print(f"   LED1: {state1}")
-    print(f"   LED2: {state2}")
-    print(f"   LED3: {state3}")
+    print_led_dashboard()
 
-def publish_temperature():
-    """Publica datos de temperatura simulados"""
-    global simulated_temperature
-    
-    # Simular variación de temperatura
-    variation = round(random.uniform(-0.5, 0.5), 1)
-    simulated_temperature = round(simulated_temperature + variation, 1)
-    
-    # Mantener temperatura en rango realista
-    simulated_temperature = max(20.0, min(35.0, simulated_temperature))
-    
-    client.publish(MQTT_TOPIC_TEMPERATURA, str(simulated_temperature))
-    print(f"🌡️ Temperatura publicada: {simulated_temperature}°C")
+def publish_all_states(client):
+    """Publica el estado actual de todos los LEDs (para sincronizar el dashboard)."""
+    for num in [1, 2, 3]:
+        state_str = "ON" if led_state[num] else "OFF"
+        client.publish(TOPICS_STATUS[num], state_str, retain=True)
+    log("Estados iniciales publicados (todos OFF)", "ok")
 
-def simulate_external_changes():
-    """Simula cambios externos en el dispositivo (como si fuera el ESP32)"""
-    global simulated_led1_state, simulated_led2_state, simulated_led3_state
+# ──────────────────────────────────────────────
+# CLIENTE MQTT
+# ──────────────────────────────────────────────
+# ID único para evitar conflictos de sesión en el broker
+unique_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+client_id = f"sim-esp32-{unique_suffix}"
 
-    while True:
-        time.sleep(15)  # Cada 15 segundos
-
-        # Simular cambios aleatorios de estado (ocasionalmente)
-        if random.random() < 0.3:  # 30% de probabilidad
-            led_num = random.choice([1, 2, 3])
-            if led_num == 1:
-                simulated_led1_state = not simulated_led1_state
-                state_msg = "ON" if simulated_led1_state else "OFF"
-                client.publish(MQTT_TOPIC_LED1_STATUS, state_msg)
-                print(f"🔄 Cambio externo LED1: {state_msg}")
-            elif led_num == 2:
-                simulated_led2_state = not simulated_led2_state
-                state_msg = "ON" if simulated_led2_state else "OFF"
-                client.publish(MQTT_TOPIC_LED2_STATUS, state_msg)
-                print(f"🔄 Cambio externo LED2: {state_msg}")
-            elif led_num == 3:
-                simulated_led3_state = not simulated_led3_state
-                state_msg = "ON" if simulated_led3_state else "OFF"
-                client.publish(MQTT_TOPIC_LED3_STATUS, state_msg)
-                print(f"🔄 Cambio externo LED3: {state_msg}")
-
-        # Simular lectura de temperatura
-        publish_temperature()
-
-# ==========================================
-# INICIALIZACIÓN DEL CLIENTE MQTT
-# ==========================================
-
-# Crear cliente con ID único
-client = mqtt.Client(client_id="simulador_esp32_python")
-client.on_connect = on_connect
-client.on_message = on_message
-client.on_publish = on_publish
+client = mqtt.Client(client_id=client_id, clean_session=True)
+client.on_connect    = on_connect
+client.on_message    = on_message
 client.on_disconnect = on_disconnect
 
-print("========================================")
-print("🚀 Simulador MQTT ESP32 Iniciando...")
-print("========================================")
-print(f"📡 Broker: {MQTT_BROKER}:{MQTT_PORT}")
-print(f"🎯 Tópico Control LED1: {MQTT_TOPIC_LED1}")
-print(f"🎯 Tópico Control LED2: {MQTT_TOPIC_LED2}")
-print(f"🎯 Tópico Control LED3: {MQTT_TOPIC_LED3}")
-print(f"🌡️ Tópico Temperatura: {MQTT_TOPIC_TEMPERATURA}")
-print("========================================")
+# ──────────────────────────────────────────────
+# MAIN
+# ──────────────────────────────────────────────
+def main():
+    print_header()
+    print(f"  Client ID: {c(client_id, 'gray')}")
+    log(f"Conectando a {c(MQTT_BROKER, 'white')}...", "info")
 
-try:
-    # Conectar al broker
-    client.connect(MQTT_BROKER, MQTT_PORT, 60)
-    
-    # Iniciar el hilo de red en segundo plano
-    client.loop_start()
-    
-    # Iniciar hilo para simulación de cambios externos
-    simulation_thread = threading.Thread(target=simulate_external_changes)
-    simulation_thread.daemon = True
-    simulation_thread.start()
-    
-    print("✅ Simulador iniciado correctamente")
-    print("📋 Comandos disponibles desde el dashboard: ON, OFF, TOGGLE")
-    print("   Para cada LED: LED1/control, LED2/control, LED3/control")
-    print("⏱️ Simulando cambios externos cada 15 segundos")
-    print("⌨️ Presiona Ctrl+C para detener\n")
-    
-    # Mantener el programa principal ejecutándose
-    while True:
-        time.sleep(1)
-        
-except KeyboardInterrupt:
-    print("\n🛑 Simulación detenida por el usuario.")
-    client.loop_stop()
-    client.disconnect()
-    print("👋 Conexión cerrada correctamente")
+    try:
+        client.connect(MQTT_BROKER, MQTT_PORT, KEEPALIVE)
+        client.loop_start()
+
+        print(c("\n  Instrucciones:", "bold"))
+        print(f"    1. Ejecuta el dashboard en el navegador")
+        print(f"    2. Haz clic en {c('Conectar', 'green')} en el navbar")
+        print(f"    3. Enciende/apaga los LEDs → verás los cambios aquí")
+        print(f"    4. Presiona {c('Ctrl+C', 'yellow')} para detener\n")
+
+        while True:
+            time.sleep(1)
+
+    except KeyboardInterrupt:
+        print(c("\n\n  🛑 Simulación detenida por el usuario.", "yellow"))
+    except Exception as e:
+        print(c(f"\n  ✘ Error: {e}", "red"))
+        print(c("  Verifica que el broker sea accesible y el puerto 1883 no esté bloqueado.", "gray"))
+        sys.exit(1)
+    finally:
+        if is_connected:
+            client.loop_stop()
+            client.disconnect()
+        print(c("  👋 Desconectado correctamente.\n", "gray"))
+
+if __name__ == "__main__":
+    main()
