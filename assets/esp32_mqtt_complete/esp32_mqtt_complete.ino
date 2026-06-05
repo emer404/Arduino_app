@@ -42,7 +42,7 @@ const char* MQTT_TOPIC_LED3_STATUS = "LED3/status";
 #endif
 
 #ifndef LED1_PIN
-  #define LED1_PIN 3
+  #define LED1_PIN 2
 #endif
 
 #ifndef LED2_PIN
@@ -50,7 +50,7 @@ const char* MQTT_TOPIC_LED3_STATUS = "LED3/status";
 #endif
 
 #ifndef LED3_PIN
-  #define LED3_PIN 7
+  #define LED3_PIN 18
 #endif
 
 WiFiClient wifiClient;

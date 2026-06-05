@@ -68,9 +68,9 @@ COLORS = {
 }
 
 LED_COLOR = {
-    1: "\033[91m",   # Rojo  (LED1)
-    2: "\033[92m",   # Verde (LED2)
-    3: "\033[94m",   # Azul  (LED3)
+    1: "red",    # Rojo  (LED1)
+    2: "green",  # Verde (LED2)
+    3: "cyan",   # Azul  (LED3)
 }
 
 def c(text, color):
@@ -99,7 +99,7 @@ def print_led_dashboard():
         icon  = "●" if state else "○"
         label = "ON " if state else "OFF"
         color = LED_COLOR[num] if state else "gray"
-        print(f"  │  {LED_COLOR[num]}{icon}{COLORS['reset']}  {led_labels[num]}  →  {c(label, color)}           │")
+        print(f"  │  {c(icon, LED_COLOR[num])}  {led_labels[num]}  →  {c(label, color)}           │")
     print(c("  └─────────────────────────────────────────────┘", "cyan"))
     print()
 
