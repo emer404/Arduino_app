@@ -8,8 +8,18 @@
  * - Configuración opcional en config_secrets.h
  */
 
+#include <Arduino.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
+
+// Forward declarations
+void setupWiFi();
+bool reconnectMQTT();
+void mqttCallback(char* topic, byte* payload, unsigned int length);
+void processControlCommand(String command, int ledNum);
+void setLedState(bool state, int ledNum);
+void publishLedStates();
+void WiFiEvent(WiFiEvent_t event);
 
 #ifdef __has_include
   #if __has_include("config_secrets.h")
@@ -18,8 +28,8 @@
 #endif
 
 #ifndef WIFI_SSID
-  #define WIFI_SSID "Funcionarios"
-  #define WIFI_PASSWORD "SomosSena_2025"
+  #define WIFI_SSID "Wokwi-GUEST"
+  #define WIFI_PASSWORD ""
 #endif
 
 #ifndef MQTT_BROKER
