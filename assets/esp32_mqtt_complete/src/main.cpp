@@ -249,6 +249,30 @@ void setLedState(bool state, int ledNum) {
   Serial.print(ledNum);
   Serial.print(" publicado: ");
   Serial.println(stateMessage);
+
+  // Si se está encendiendo un LED, apagar automáticamente los otros dos
+  if (state) {
+    Serial.println("Verificando otros LEDs para exclusión mutua...");
+    
+    if (ledNum != 1 && led1State) {
+      led1State = false;
+      digitalWrite(LED1_PIN, LOW);
+      mqttClient.publish(MQTT_TOPIC_LED1_STATUS, "OFF");
+      Serial.println("LED1 apagado automáticamente (exclusión mutua)");
+    }
+    if (ledNum != 2 && led2State) {
+      led2State = false;
+      digitalWrite(LED2_PIN, LOW);
+      mqttClient.publish(MQTT_TOPIC_LED2_STATUS, "OFF");
+      Serial.println("LED2 apagado automáticamente (exclusión mutua)");
+    }
+    if (ledNum != 3 && led3State) {
+      led3State = false;
+      digitalWrite(LED3_PIN, LOW);
+      mqttClient.publish(MQTT_TOPIC_LED3_STATUS, "OFF");
+      Serial.println("LED3 apagado automáticamente (exclusión mutua)");
+    }
+  }
 }
 
 void publishLedStates() {
