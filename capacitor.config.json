@@ -1,0 +1,15 @@
+{
+  "appId": "com.nexus.iot",
+  "appName": "NEXUS IoT",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": "android.keystore",
+      "keystoreAlias": "android"
+    }
+  }
+}

@@ -16,6 +16,24 @@
     <link rel="stylesheet" type="text/css" href="assets/css/util.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
     <link rel="icon" type="image/png" href="assets/images/icons/favicon.ico" />
+
+
+    <!-- PWA -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#06b6d4">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="NEXUS IoT">
+<link rel="apple-touch-icon" href="/assets/images/icons/icon-192.png">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('SW registrado'))
+        .catch(err => console.error('SW error:', err));
+    });
+  }
+</script>
 </head>
 
 <body>

@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+www/
+dist/
+build/
+
+# APK files
+*.apk
+*.aab
+
+# Android
+Android/
+android/.gradle/
+android/app/build/
+android/app/release/
+android/app/debug/
+android/local.properties
+android/*.iml
+android/.idea/
+android/captacitor/
+
+# iOS
+ios/
+Pods/
+*.xcworkspace
+
+# Capacitor
+.capacitor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive files
+*.keystore
+*.jks
+*.p12
+*.pem
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# PDF files (documentation can be external)
+*.pdf
+
+# Temporary files
+tmp/
+temp/
